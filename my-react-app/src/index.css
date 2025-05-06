@@ -1,3 +1,8 @@
+body{
+  background-color: rgba(54, 94, 204, 0.658);
+}
+
 .card{
   border: 1px solid ;
+  border-width: 2px;
 }
