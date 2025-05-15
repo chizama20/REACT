@@ -1,13 +1,22 @@
-body{
-  background-color: rgba(54, 94, 204, 0.658);
+h1{
+  text-align: center;
 }
 
-.card{
-  border: 1px solid hsla(0, 0%, 0%, 0.89);
-  border-width: 2px;
-  border-radius: 10px;
-  padding: 10px;
+.set-color{
+  border-radius: 25px;
+  background: #73AD21;
+  padding: 20px;
+  width: 200px;
+  height: 150px;
+  margin: auto;
+}
+
+.set-color p{
   text-align: center;
-  max-width: fit-content;
-  display: inline-block;
+  font-size: 30px;
+}
+
+.set{
+  margin: auto;
+  text-align: center;
 }
