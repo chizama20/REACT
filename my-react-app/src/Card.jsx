@@ -1,28 +1,49 @@
 import { useState } from "react";
 
 function Card(){
-    const [color, setColor] = useState("#FFFFFF");
+    const [task, setTask] = useState(["apple", "orange"]);
 
-    function changeColor(event){
-        setColor(event.target.value);
+
+    function handleTask(){
+        const newTask = document.getElementById("taskInput").value;
+        document.getElementById("taskInput").value = "";
+        setTask(t => [...t, newTask]);
     }
 
-    return(    
+    function removeTask(index){
+        setTask(task.filter((_, i) => i !== index));
+    }
+
+    function shiftUp(){
+        
+    }
+    function shiftUp(){
+
+    }
+
+    return(
+
         <div>
-            <h1>Color Picker</h1>
-            <div style={{backgroundColor: color}} className="set-color">
-                <p>
-                    Selected Color: {color}
-                </p>
+            <h1>To-Do-List</h1>
+            <div>
+                <input  id="taskInput" type="text" placeholder="Enter a task..."></input>
+                <button onClick={handleTask}>Add</button>
             </div>
 
-            <div className="set">
-                <p>Select a Color:</p>
-                <input type="color" onChange={changeColor}></input>
+            <div>
+                <ol>
+                    {task.map((task, index) => 
+                        <li key={index} >
+                            {task} <button onClick={() => removeTask(index)}> Delete</button>  
+                                    <button onClick={() => shiftUp()}>⬆️</button>  
+                                    <button onClick={() => shiftDown()}>⬇️</button>
+                        </li>)}
+
+                </ol>
             </div>
 
         </div>
-    );
+    )
 }
 
 export default Card
