@@ -1,54 +1,74 @@
 import { useState } from "react";
 
+function Profile() {
+  const [users, setUser] = useState([]);
+  const [username, setName] = useState("");
+  const [userage, setAge] = useState("");
+  const [screen, setScreen] = useState("home");
 
-function Profile(){
-    
-    const [users, setUser] = useState([]);
-    const [username, setName] = useState("");
-    const [userage, setAge] = useState("");
+  function handleAddUser(e) {
+    e.preventDefault(); 
 
-    function handleAddUser(){
-        const newUser = {name: username,
-                        age: userage};
+    const newUser = { name: username, age: userage };
+    setUser((u) => [...u, newUser]);
 
-        setUser(u => [...u, newUser]);
-    }
+    setName("");
+    setAge("");
+    setScreen("home");
+  }
 
-    function handleAddName(event){
-        setUser(event.target.value);        
-    }
-    
-    function handleAddAge(event){
-        setAge(event.target.value);
-    }
-    function handleRemoveUser(index){
+  function handleAddName(event) {
+    setName(event.target.value); 
+  }
 
-    }
+  function handleAddAge(event) {
+    setAge(event.target.value);
+  }
 
-    return(
+  function handleRemoveUser(index) {
+    setUser((u) => u.filter((_, i) => i !== index));
+  }
 
-        <div>
-            <form className="profile-form">
-                <p>Who are you...</p>
-                <ul>
-                    {users.map((username, index) =>
-                    <li key={index}>
-                        {username.name}
+    if (screen === "add") {
+    return (
+      <div>
+        <h2>Add User</h2>
+        <form onSubmit={handleAddUser}>
+          <input
+            type="text"
+            placeholder="Enter a Username"
+            value={username}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <br />
+          <input
+            type="number"
+            placeholder="Enter your age"
+            value={userage}
+            onChange={(e) => setAge(e.target.value)}
+          />
+          <br />
+          <button type="submit">Submit</button>
+          <button type="button" onClick={() => setScreen("home")}>Back</button>
+        </form>
+      </div>
+    );
+  }
 
-                    </li>)}
-                </ul>
-
-                <form>
-                    <h4>Add User</h4>
-                    <input type="text" placeholder="Enter a Username" value={username} onChange={handleAddName} ></input><br></br>
-                    <input type="number" placeholder="Enter your age" value={userage} onChange={handleAddAge}></input><br></br>
-                    <button onClick={handleAddUser}>Submit</button>
-                </form>
-
-
-
-            </form>
-        </div>
-    )
+    return (
+    <div>
+      <h2>User Selection</h2>
+      <ul>
+        {users.map((user, index) => (
+          <li key={index}>
+            {user.name} ({user.age})
+            <button onClick={() => handleRemoveUser(index)}>❌</button>
+          </li>
+        ))}
+      </ul>
+      <button onClick={() => setScreen("add")}>➕ Add New User</button>
+    </div>
+  );
 }
-export default Profile
+
+export default Profile;
