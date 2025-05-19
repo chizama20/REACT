@@ -31,7 +31,7 @@ function Profile() {
 
     if (screen === "add") {
     return (
-      <div>
+      <div className="add-user-tab">
         <h2>Add User</h2>
         <form onSubmit={handleAddUser}>
           <input
@@ -56,7 +56,7 @@ function Profile() {
   }
 
     return (
-    <div>
+    <div className="user-selection-tab">
       <h2>User Selection</h2>
       <ul>
         {users.map((user, index) => (

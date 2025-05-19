@@ -1,7 +1,26 @@
-.profile-form{
+body{
+    background-color: rgb(0, 89, 255);
+}
+
+.user-selection-tab{
+    background-color: white;
     position: absolute;
     top: 38%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 2px groove grey;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 40px;
+
+}
+
+.add-user-tab{
+    background-color: white;
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 40px;
 }
