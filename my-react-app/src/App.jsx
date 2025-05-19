@@ -1,10 +1,10 @@
-import './Card.jsx'
-import Card from './Card.jsx'
+import './Components/Profile.jsx'
+import Profile from './Components/Profile.jsx';
 
 function App() {
   return(
     <>
-      <Card></Card>
+      <Profile></Profile>
     </>
 
   );
