@@ -77,3 +77,10 @@ button:hover {
 
 }
 
+.continue{
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    top: 800px;
+    right: 10px;
+}

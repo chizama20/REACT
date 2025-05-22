@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { db } from './firebase';
+import { collection, addDoc } from 'firebase/firestore';
+
+import { useState, useEffect} from "react";
 
 function Profile() {
     const [screen, setScreen] = useState("age");
@@ -7,14 +10,33 @@ function Profile() {
     const [addiction, setAddiction] = useState("");
     const [goal, setGoal] = useState("");
 
-    const ageRanges = ["13 to 17", "25 to 34", "35 to 50", "50+"];
+    const ageRanges = ["13 to 17","18 to 24", "25 to 34", "35 to 50", "50 and above"];
     const genders =["Male", "Female", "Others"];
     const addictions =["Smoking", "Vaping", "Fap", "Alcohol", "None of the above", "More than one of the above"];
-    const goals =["Learn new skills regularly", "Strengthen my relationships", "BUuild a successful career", "Stay fit and healthy", "None of the above", "More than one of the above"];
+    const goals =["Learn new skills regularly", "Strengthen my relationships", "Build a successful career", "Stay fit and healthy", "None of the above", "More than one of the above"];
 
+    const userProfile = {
+        age: selectedAge,
+        gender: gender,
+        addiction: addiction,
+        goal: goal,
+        timestamp: new Date()
+    };
 
+     useEffect(() => {
+    if (screen === "run"){
+        saveProfile();
+        }
+    }, [screen]);
 
-
+    const saveProfile = async () => {
+    try {
+        await addDoc(collection(db, "profiles"), userProfile);
+        console.log("Profile saved!");
+    } catch (e) {
+        console.error("Error saving profile: ", e);
+    }
+    };
 
     if (screen === "age") {
         return (
@@ -87,23 +109,17 @@ function Profile() {
     );
     }
 
-    if (screen === "run"){
     return(
         <div className="run-screen">
             <button className="rback-btn" onClick={() => setScreen("goal") }>⬅️</button>
-            <p>running</p>
-            {genders.map((range) => (
-                <button
-                key={range}
-                className={gender == range ? "selected" : ""}
-                onClick={() => (setGender(range), setScreen(""))}
-                >
-                    {range}
-                </button>
-            ))}
+            <p>Age: {userProfile.age}</p>
+            <p>Gender: {userProfile.gender}</p>
+            <p>Addiction: {userProfile.addiction}</p>
+            <p>Goal: {userProfile.goal}</p>
+            <button className="continue" onClick={() => setScreen("") }>Continue</button>
         </div>
     );
-    }
+    
 }
 
 export default Profile;
