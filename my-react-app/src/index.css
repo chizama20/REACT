@@ -1,3 +1,35 @@
 body{
     background-color: rgb(0, 89, 255);
 }
+
+.age-screen{
+    border: 2px solid black;
+    background: white;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+
+.age-screen button {
+  display: block;
+  margin-bottom: 10px;
+}
+
+button.selected {
+  border: 2px solid #007bff;
+  background-color: #e7f1ff;
+}
+
+
+.gender-screen{
+    border: 2px solid black;
+    background: white;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+
+.gender-screen button {
+  display: block;
+  margin-bottom: 10px;
+}
