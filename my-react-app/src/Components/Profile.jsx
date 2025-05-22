@@ -4,7 +4,8 @@ import { collection, addDoc } from 'firebase/firestore';
 import { useState, useEffect} from "react";
 
 function Profile() {
-    const [screen, setScreen] = useState("age");
+    const [username, setUsername] = useState("");
+    const [screen, setScreen] = useState("name");
     const [selectedAge, setSelectedAge] = useState("");
     const [gender, setGender] = useState("");
     const [addiction, setAddiction] = useState("");
@@ -16,6 +17,7 @@ function Profile() {
     const goals =["Learn new skills regularly", "Strengthen my relationships", "Build a successful career", "Stay fit and healthy", "None of the above", "More than one of the above"];
 
     const userProfile = {
+        name: username,
         age: selectedAge,
         gender: gender,
         addiction: addiction,
@@ -38,9 +40,19 @@ function Profile() {
     }
     };
 
+    if (screen === "name") {
+        return (
+            <div className="name-screen">
+                <p>Enter you name</p>
+                <input type='text' placeholder='type here...' value={username} onChange={(e) => setUsername(e.target.value)}></input>
+                <button className="continue" onClick={() => setScreen("age") }>Continue</button>
+            </div>
+        );
+    }
     if (screen === "age") {
         return (
             <div className="age-screen">
+                <button className="gback-btn" onClick={() => setScreen("age") }>⬅️</button>v
                 <p>How old are you?</p>
                 {ageRanges.map((range) => (
                 <button
@@ -112,6 +124,7 @@ function Profile() {
     return(
         <div className="run-screen">
             <button className="rback-btn" onClick={() => setScreen("goal") }>⬅️</button>
+            <p>Name: {userProfile.name}</p>
             <p>Age: {userProfile.age}</p>
             <p>Gender: {userProfile.gender}</p>
             <p>Addiction: {userProfile.addiction}</p>
